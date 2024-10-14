@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "fgf",
+        "grg",
+        "fgf"
+    ],
+    "key": {
+        "f": {
+            "item": "minecraft:feather"
+        },
+        "g": {
+            "item": "minecraft:gold_ingot"
+        },
+        "r": {
+            "item": "minecraft:redstone"
+        }
+    },
+    "result": {
+        "count": 1,
+        "id": "utilityring:ring_of_flight"
+    }
+}
