@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import net.infernodragon.utilityring.items.RingOfFlight;
+import net.infernodragon.utilityring.items.RingOfRocketElytra;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,9 +44,11 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(UtilityRingMod.MODID)
@@ -61,6 +64,7 @@ public class UtilityRingMod
 
     //Items
     public static final DeferredItem<Item> RING_OF_FLIGHT = ITEMS.registerItem("ring_of_flight", RingOfFlight::new, new Item.Properties());
+    public static final DeferredItem<Item> RING_OF_ROCKET_ELYTRA = ITEMS.registerItem("ring_of_rocket_elytra", RingOfRocketElytra::new, new Item.Properties());
 
     // Creative Tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("rings", () -> CreativeModeTab.builder()
@@ -69,6 +73,7 @@ public class UtilityRingMod
             .icon(() -> RING_OF_FLIGHT.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(RING_OF_FLIGHT.get());
+                output.accept(RING_OF_ROCKET_ELYTRA.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -130,6 +135,10 @@ public class UtilityRingMod
                             // player.getAbilities().mayfly = true;
                             player.getAttribute(NeoForgeMod.CREATIVE_FLIGHT).addTransientModifier(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("neoforge", "creative_flight"),1.0F, AttributeModifier.Operation.ADD_VALUE));
                             player.onUpdateAbilities();
+                        }
+
+                        if (player.getAbilities().flying) {
+                            this.getStack().hurtAndBreak(1, player, null);
                         }
                     }
                 }

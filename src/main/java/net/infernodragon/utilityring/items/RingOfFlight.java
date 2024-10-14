@@ -13,7 +13,7 @@ public class RingOfFlight extends Item {
     public RingOfFlight(Properties properties) {
         super(properties
                 .stacksTo(1)
-                .durability(256)
+                .durability(10240)
                 .rarity(Rarity.RARE));
     }
     
