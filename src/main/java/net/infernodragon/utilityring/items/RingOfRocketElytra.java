@@ -3,6 +3,7 @@ package net.infernodragon.utilityring.items;
 import java.util.List;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +43,7 @@ public class RingOfRocketElytra extends Item implements ICurioItem {
                 Vec3 newMovent = new Vec3(movement.x * 0.08F, 0, movement.z * 0.08F);
 
                 if (!(newMovent.length() > 0.25F)) {
-                    stack.hurtAndBreak(1, player, null);
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                     player.addDeltaMovement(newMovent);
                 }
 

@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import net.infernodragon.utilityring.items.RingOfFlight;
+import net.infernodragon.utilityring.items.RingOfLife;
 import net.infernodragon.utilityring.items.RingOfRocketElytra;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -12,6 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -39,6 +41,7 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -49,6 +52,7 @@ import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
+import top.theillusivec4.curios.common.capability.CurioInventory;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(UtilityRingMod.MODID)
@@ -65,6 +69,7 @@ public class UtilityRingMod
     //Items
     public static final DeferredItem<Item> RING_OF_FLIGHT = ITEMS.registerItem("ring_of_flight", RingOfFlight::new, new Item.Properties());
     public static final DeferredItem<Item> RING_OF_ROCKET_ELYTRA = ITEMS.registerItem("ring_of_rocket_elytra", RingOfRocketElytra::new, new Item.Properties());
+    public static final DeferredItem<Item> RING_OF_LIFE = ITEMS.registerItem("ring_of_life", RingOfLife::new, new Item.Properties());
 
     // Creative Tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("rings", () -> CreativeModeTab.builder()
@@ -74,6 +79,7 @@ public class UtilityRingMod
             .displayItems((parameters, output) -> {
                 output.accept(RING_OF_FLIGHT.get());
                 output.accept(RING_OF_ROCKET_ELYTRA.get());
+                output.accept(RING_OF_LIFE.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -138,7 +144,7 @@ public class UtilityRingMod
                         }
 
                         if (player.getAbilities().flying) {
-                            this.getStack().hurtAndBreak(1, player, null);
+                            this.getStack().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                         }
                     }
                 }
@@ -180,6 +186,32 @@ public class UtilityRingMod
     {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    @SubscribeEvent
+    public void OnPlayerDeath(LivingDeathEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            CuriosApi.getCuriosInventory(player).ifPresent(inventory -> {
+                inventory.getCurios().forEach((identifier, slotInventory) -> {
+                    if (slotInventory != null) {
+                        for (int i = 0; i < slotInventory.getStacks().getSlots(); i++) {
+                            ItemStack stack = slotInventory.getStacks().getStackInSlot(i);
+
+                            if (stack.getItem() instanceof RingOfLife) {
+                                RingOfLife ringOfLife = (RingOfLife) stack.getItem();
+                                boolean result = ringOfLife.checkTotemUsage(event.getSource(), player, stack);
+                                event.setCanceled(result);
+                                if (result) {
+                                    break;
+                                }
+                            }
+                        }
+                            
+                    }
+                });
+            });
+        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

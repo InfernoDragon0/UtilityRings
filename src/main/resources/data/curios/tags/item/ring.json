@@ -2,7 +2,8 @@
     "replace": false,
     "values": [
         "utilityring:ring_of_flight",
-        "utilityring:ring_of_rocket_elytra"
+        "utilityring:ring_of_rocket_elytra",
+        "utilityring:ring_of_life"
     ]
 
 }

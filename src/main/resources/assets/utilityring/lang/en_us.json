@@ -3,5 +3,7 @@
     "tooltip.utilityring.ring_of_flight": "Enables Flight when worn",
     "item.utilityring.ring_of_flight": "Ring of Flight",
     "tooltip.utilityring.ring_of_rocket_elytra": "Increases Elytra Flight Speed when Worn",
-    "item.utilityring.ring_of_rocket_elytra": "Ring of Rocket Elytra"
+    "item.utilityring.ring_of_rocket_elytra": "Ring of Rocket Elytra",
+    "tooltip.utilityring.ring_of_life": "Prevents Death when Worn",
+    "item.utilityring.ring_of_life": "Ring of Life"
 }
