@@ -5,7 +5,10 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import net.infernodragon.utilityring.items.RingOfFlight;
+import net.infernodragon.utilityring.items.RingOfHopper;
 import net.infernodragon.utilityring.items.RingOfLife;
+import net.infernodragon.utilityring.items.RingOfReverseHopper;
+import net.infernodragon.utilityring.items.RingOfRocketElytraWeakened;
 import net.infernodragon.utilityring.items.RingOfRocketElytra;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -69,7 +72,11 @@ public class UtilityRingMod
     //Items
     public static final DeferredItem<Item> RING_OF_FLIGHT = ITEMS.registerItem("ring_of_flight", RingOfFlight::new, new Item.Properties());
     public static final DeferredItem<Item> RING_OF_ROCKET_ELYTRA = ITEMS.registerItem("ring_of_rocket_elytra", RingOfRocketElytra::new, new Item.Properties());
+    public static final DeferredItem<Item> RING_OF_ROCKET_ELYTRA_WEAKENED = ITEMS.registerItem("ring_of_rocket_elytra_weakened", RingOfRocketElytraWeakened::new, new Item.Properties());
     public static final DeferredItem<Item> RING_OF_LIFE = ITEMS.registerItem("ring_of_life", RingOfLife::new, new Item.Properties());
+    public static final DeferredItem<Item> RING_OF_REVERSE_HOPPER = ITEMS.registerItem("ring_of_reverse_hopper", RingOfReverseHopper::new, new Item.Properties());
+    public static final DeferredItem<Item> RING_OF_HOPPER = ITEMS.registerItem("ring_of_hopper", RingOfHopper::new, new Item.Properties());
+
 
     // Creative Tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("rings", () -> CreativeModeTab.builder()
@@ -79,7 +86,10 @@ public class UtilityRingMod
             .displayItems((parameters, output) -> {
                 output.accept(RING_OF_FLIGHT.get());
                 output.accept(RING_OF_ROCKET_ELYTRA.get());
+                output.accept(RING_OF_ROCKET_ELYTRA_WEAKENED.get());
                 output.accept(RING_OF_LIFE.get());
+                output.accept(RING_OF_REVERSE_HOPPER.get());
+                output.accept(RING_OF_HOPPER.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

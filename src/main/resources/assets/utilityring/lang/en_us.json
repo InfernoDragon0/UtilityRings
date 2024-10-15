@@ -2,8 +2,14 @@
     "itemGroup.utilityring": "Utility Rings",
     "tooltip.utilityring.ring_of_flight": "Enables Flight when worn",
     "item.utilityring.ring_of_flight": "Ring of Flight",
-    "tooltip.utilityring.ring_of_rocket_elytra": "Increases Elytra Flight Speed when Worn",
-    "item.utilityring.ring_of_rocket_elytra": "Ring of Rocket Elytra",
+    "tooltip.utilityring.ring_of_rocket_elytra": "Significantly Increases Elytra Flight Speed when Worn",
+    "item.utilityring.ring_of_rocket_elytra": "Ring of Rocket Elytra II",
+    "tooltip.utilityring.ring_of_rocket_elytra_weakened": "Increases Elytra Flight Speed when Worn",
+    "item.utilityring.ring_of_rocket_elytra_weakened": "Ring of Rocket Elytra I",
     "tooltip.utilityring.ring_of_life": "Prevents Death when Worn",
-    "item.utilityring.ring_of_life": "Ring of Life"
+    "item.utilityring.ring_of_life": "Ring of Life",
+    "tooltip.utilityring.ring_of_reverse_hopper": "Collects items from inventories below you when Worn",
+    "item.utilityring.ring_of_reverse_hopper": "Ring of Reverse Hopper",
+    "tooltip.utilityring.ring_of_hopper": "Deposits items into inventories below you when Worn",
+    "item.utilityring.ring_of_hopper": "Ring of Hopper"
 }

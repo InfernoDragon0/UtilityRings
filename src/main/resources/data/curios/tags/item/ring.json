@@ -3,7 +3,10 @@
     "values": [
         "utilityring:ring_of_flight",
         "utilityring:ring_of_rocket_elytra",
-        "utilityring:ring_of_life"
+        "utilityring:ring_of_rocket_elytra_weakened",
+        "utilityring:ring_of_life",
+        "utilityring:ring_of_reverse_hopper",
+        "utilityring:ring_of_hopper"
     ]
 
 }

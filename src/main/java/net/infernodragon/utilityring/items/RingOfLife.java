@@ -22,7 +22,7 @@ public class RingOfLife extends Item implements ICurioItem {
         super(properties
                 .stacksTo(1)
                 .durability(4)
-                .rarity(Rarity.EPIC));
+                .rarity(Rarity.RARE));
     }
 
     public boolean checkTotemUsage(DamageSource pDamageSource, Player player, ItemStack pStack) {

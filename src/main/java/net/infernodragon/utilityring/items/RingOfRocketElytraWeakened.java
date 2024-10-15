@@ -13,18 +13,18 @@ import net.minecraft.world.phys.Vec3;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class RingOfRocketElytra extends Item implements ICurioItem {
+public class RingOfRocketElytraWeakened extends Item implements ICurioItem {
     
-    public RingOfRocketElytra(Properties properties) {
+    public RingOfRocketElytraWeakened(Properties properties) {
         super(properties
                 .stacksTo(1)
                 .durability(4096)
-                .rarity(Rarity.RARE));
+                .rarity(Rarity.UNCOMMON));
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        pTooltipComponents.add(Component.translatable("tooltip.utilityring.ring_of_rocket_elytra"));
+        pTooltipComponents.add(Component.translatable("tooltip.utilityring.ring_of_rocket_elytra_weakened"));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class RingOfRocketElytra extends Item implements ICurioItem {
 
                 Vec3 newMovent = new Vec3(movement.x * 0.08F, 0, movement.z * 0.08F);
 
-                if (!(newMovent.length() > 0.25F)) {
+                if (!(newMovent.length() > 0.15F)) {
                     stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                     player.addDeltaMovement(newMovent);
                 }
